@@ -83,29 +83,6 @@ class _OnlineStatusWidgetState extends State<OnlineStatusWidget> {
             offstage: !(!_svcStopped.value &&
                 stateGlobal.svcStatus.value == SvcStatus.ready &&
                 _svcIsUsingPublicServer.value),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(', ', style: TextStyle(fontSize: em)),
-                Flexible(
-                  child: InkWell(
-                    onTap: onUsePublicServerGuide,
-                    child: Row(
-                      children: [
-                        Flexible(
-                          child: Text(
-                            translate('setup_server_tip'),
-                            style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                fontSize: em),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
           ),
         );
 
@@ -307,17 +284,19 @@ class _ConnectionPageState extends State<ConnectionPage>
     return Column(
       children: [
         Expanded(
-            child: Column(
-          children: [
-            Row(
+            child: Column(       
               children: [
-                Flexible(child: _buildRemoteIDTextField(context)),
+                Expanded(
+                  child: Center(
+                    child: Image.asset(
+                      'assets/logo.png',
+                      width: 399, 
+                      height: 106, 
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
               ],
-            ).marginOnly(top: 22),
-            SizedBox(height: 12),
-            Divider().paddingOnly(right: 12),
-            Expanded(child: PeerTabPage()),
-          ],
         ).paddingOnly(left: 12.0)),
         if (!isOutgoingOnly) const Divider(height: 1),
         if (!isOutgoingOnly) OnlineStatusWidget()
